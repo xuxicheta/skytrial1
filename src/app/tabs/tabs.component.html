@@ -1,3 +1,10 @@
-<p>
-  tabs works!
-</p>
+<div
+  class="tabs__titles"
+  role="tablist"
+>
+  <ng-container *ngFor="let template of tabTitleTemplates | async">
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+  </ng-container>
+</div>
+
+<ng-container *ngTemplateOutlet="activeTabContentTemplate | async"></ng-container>
