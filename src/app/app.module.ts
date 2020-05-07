@@ -10,6 +10,5 @@ import { TestComponent } from './test.component';
   imports:      [ BrowserModule, FormsModule ],
   declarations: [ AppComponent, HelloComponent, TestComponent ],
   bootstrap:    [ AppComponent ],
-  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }
