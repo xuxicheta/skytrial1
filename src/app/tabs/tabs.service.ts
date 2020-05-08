@@ -7,10 +7,10 @@ import { TabComponent } from '../tab/tab.component';
 
 @Injectable()
 export class TabsService {
-  private readonly clickedTab = new BehaviorSubject<TabComponent>(null);
+  private readonly clickedTabTitle = new BehaviorSubject<TabTitleComponent>(null);
   private readonly tabList = new ReplaySubject<TabComponent[]>(1);
 
-  public readonly activeTab = this.createActiveTab(this.clickedTab, this.tabList);
+  public readonly activeTab = this.createActiveTab(this.clickedTabTitle, this.tabList);
   public readonly titleTemplates = this.createTitleTemplates(this.tabList);
   public readonly activeContentTemplate = this.createActiveContentTemplate(this.activeTab);
 
@@ -18,18 +18,18 @@ export class TabsService {
     this.tabList.next(tabList);
   }
 
-  public onTabTitleClick(tab: TabComponent) {
-    this.clickedTab.next(tab);
+  public onTabTitleClick(tabTitle: TabTitleComponent) {
+    this.clickedTabTitle.next(tabTitle);
   }
 
-  private createActiveTab(clickedTab: Observable<TabComponent>, tabList: Observable<TabComponent[]>) {
-    return combineLatest<[TabComponent, TabComponent[]]>([
+  private createActiveTab(clickedTab: Observable<TabTitleComponent>, tabList: Observable<TabComponent[]>) {
+    return combineLatest<[TabTitleComponent, TabComponent[]]>([
       clickedTab,
       tabList
     ]).pipe(
-      map(([clickedTab, tabList]) => {
-        return tabList.find(tab => tab === clickedTab)
-          || tabList[0];
+      map(([clickedTabTitle, tabList]) => {
+        const clickedTab = tabList.find(tab => tab.tabTitle === clickedTabTitle)
+        return clickedTab || tabList[0];
       }),
     )
   }

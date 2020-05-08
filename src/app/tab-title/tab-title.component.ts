@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TabComponent } from '../tab/tab.component';
 import { TabsService } from '../tabs/tabs.service';
 
 @Component({
@@ -15,21 +14,16 @@ export class TabTitleComponent implements OnInit, OnDestroy {
 
   @HostListener('click')
   onCLick() {
-    this.tabsService.onTabTitleClick(this.tab);
+    this.tabsService.onTabTitleClick(this);
   }
 
   constructor(
     private tabsService: TabsService,
     private renderer: Renderer2,
     private el: ElementRef<HTMLElement>,
-    @Optional() private tab: TabComponent,
   ) { }
 
   ngOnInit() {
-    if (!this.tab) {
-      throw new Error('tab-title component must be placed inside tab component');
-    }
-
     this.sub.add(this.activeTitleReaction());
     this.renderer.addClass(this.el.nativeElement, 'tabs__title');
   }
@@ -41,7 +35,7 @@ export class TabTitleComponent implements OnInit, OnDestroy {
   private activeTitleReaction() {
     return this.tabsService.activeTab
       .subscribe(activeTab => {
-        this.setActiveClass(activeTab === this.tab);
+        this.setActiveClass(activeTab.tabTitle === this);
       })
   }
 
