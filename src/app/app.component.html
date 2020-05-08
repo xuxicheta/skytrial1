@@ -9,12 +9,12 @@
 
 <tabs>
   <tab *ngFor="let tab of tabs">
-    <tab-title>
+    <ng-template tabTitle>
       Tab <b>{{ tab }}</b> title
-    </tab-title>
-    <tab-content>
+    </ng-template>
+    <ng-template tabContent>
       Tab <b>{{ tab }}</b> content
       <test [tab]="tab"></test>
-    </tab-content>
+    </ng-template>
   </tab>
 </tabs>

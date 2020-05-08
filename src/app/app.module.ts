@@ -7,12 +7,12 @@ import { HelloComponent } from './hello.component';
 import { TestComponent } from './test.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tab/tab.component';
-import { TabTitleComponent } from './tab-title/tab-title.component';
-import { TabContentComponent } from './tab-content/tab-content.component';
+import { TabTitleDirective } from './tab-title.directive';
+import { TabContentDirective } from './tab-content.directive';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, HelloComponent, TestComponent, TabsComponent, TabComponent, TabTitleComponent, TabContentComponent ],
+  declarations: [ AppComponent, HelloComponent, TestComponent, TabsComponent, TabComponent, TabTitleDirective, TabContentDirective ],
   bootstrap:    [ AppComponent ],
 })
 export class AppModule { }

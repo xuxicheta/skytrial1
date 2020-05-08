@@ -1,10 +1,18 @@
-<div
-  class="tabs__titles"
-  role="tablist"
->
-  <ng-container *ngFor="let template of tabTitleTemplates | async">
-    <ng-container *ngTemplateOutlet="template"></ng-container>
-  </ng-container>
-</div>
+<ng-container *ngIf="activeTab | async as active">
+  <div
+    class="tabs__titles"
+    role="tablist"
+  >
+    <div
+      *ngFor="let template of tabTitleTemplates | async"
+      class="tabs__title"
+      role="tab"
+      [class.tabs__title--active]="active?.tabTitle.template === template"
+      (click)="onTitleClick(template)"
+    >
+      <ng-container *ngTemplateOutlet="template"></ng-container>
+    </div>
+  </div>
 
-<ng-container *ngTemplateOutlet="(activeTab | async)?.contentTemplate"></ng-container>
+  <ng-container *ngTemplateOutlet="active.tabContent.template"></ng-container>
+</ng-container>

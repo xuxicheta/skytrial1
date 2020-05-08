@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ContentChild, ViewChild, TemplateRef } from '@angular/core';
-import { TabTitleComponent } from '../tab-title/tab-title.component';
-import { TabContentComponent } from '../tab-content/tab-content.component';
+import { Component, OnInit, ChangeDetectionStrategy, ContentChild } from '@angular/core';
+import { TabTitleDirective } from '../tab-title.directive';
+import { TabContentDirective } from '../tab-content.directive';
 
 @Component({
   selector: 'tab',
@@ -9,9 +9,8 @@ import { TabContentComponent } from '../tab-content/tab-content.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabComponent implements OnInit {
-  @ContentChild(TabTitleComponent, { static: false }) tabTitle: TabTitleComponent;
-  @ViewChild('titleTemplate', { static: false}) titleTemplate: TemplateRef<TabTitleComponent>;
-  @ViewChild('contentTemplate', { static: false }) contentTemplate: TemplateRef<TabContentComponent>;
+  @ContentChild(TabTitleDirective, { static: false }) tabTitle: TabTitleDirective;
+  @ContentChild(TabContentDirective, { static: false }) tabContent: TabTitleDirective;
 
   constructor() { }
 
