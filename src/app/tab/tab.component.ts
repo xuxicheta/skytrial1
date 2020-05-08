@@ -6,7 +6,7 @@ import { TabContentComponent } from '../tab-content/tab-content.component';
   selector: 'tab',
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabComponent implements OnInit {
   @ContentChild(TabTitleComponent, { static: false }) tabTitle: TabTitleComponent;

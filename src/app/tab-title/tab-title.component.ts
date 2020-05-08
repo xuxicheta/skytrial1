@@ -6,7 +6,8 @@ import { TabsService } from '../tabs/tabs.service';
   selector: 'tab-title',
   templateUrl: './tab-title.component.html',
   styleUrls: ['./tab-title.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { role: 'tab' },
 })
 export class TabTitleComponent implements OnInit, OnDestroy {
   private readonly sub = new Subscription();

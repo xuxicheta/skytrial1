@@ -9,10 +9,7 @@ import { TabComponent } from '../tab/tab.component';
 export class TabsService {
   private readonly clickedTabTitle = new BehaviorSubject<TabTitleComponent>(null);
   private readonly tabList = new ReplaySubject<TabComponent[]>(1);
-
   public readonly activeTab = this.createActiveTab(this.clickedTabTitle, this.tabList);
-  public readonly titleTemplates = this.createTitleTemplates(this.tabList);
-  public readonly activeContentTemplate = this.createActiveContentTemplate(this.activeTab);
 
   public updateTabList(tabList: TabComponent[]) {
     this.tabList.next(tabList);
@@ -34,16 +31,9 @@ export class TabsService {
     )
   }
 
-  private createTitleTemplates(tabList: Observable<TabComponent[]>): Observable<TemplateRef<TabTitleComponent>[]> {
-    return tabList.pipe(
+  public selectTitleTemplates(): Observable<TemplateRef<TabTitleComponent>[]> {
+    return this.tabList.pipe(
       map(tabs => tabs.map(tab => tab.titleTemplate)),
-      debounceTime(0),
-    )
-  }
-
-  private createActiveContentTemplate(activeTab: Observable<TabComponent>): Observable<TemplateRef<TabContentComponent>> {
-    return activeTab.pipe(
-      map(activeTab => activeTab && activeTab.contentTemplate),
       debounceTime(0),
     )
   }

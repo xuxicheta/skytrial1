@@ -7,4 +7,4 @@
   </ng-container>
 </div>
 
-<ng-container *ngTemplateOutlet="activeTabContentTemplate | async"></ng-container>
+<ng-container *ngTemplateOutlet="(activeTab | async)?.contentTemplate"></ng-container>
